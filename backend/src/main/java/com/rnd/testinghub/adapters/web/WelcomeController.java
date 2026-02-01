@@ -1,15 +1,32 @@
 package com.rnd.testinghub.adapters.web;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
-@RestController
+@Controller
 public class WelcomeController {
 
     @GetMapping("/")
+    public String index() {
+        return "forward:/index.html";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "forward:/index.html";
+    }
+}
+
+@RestController
+@RequestMapping("/api/info")
+class InfoController {
+
+    @GetMapping
     public Map<String, Object> welcome() {
         Map<String, Object> response = new HashMap<>();
         response.put("application", "rnd-testing-hub");
