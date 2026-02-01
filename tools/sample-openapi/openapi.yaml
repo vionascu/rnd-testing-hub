@@ -1,0 +1,226 @@
+openapi: 3.0.0
+info:
+  title: Sample User API
+  version: 1.0.0
+  description: Sample REST API for testing purposes
+
+servers:
+  - url: http://localhost:8081
+    description: Local development server
+
+paths:
+  /api/users:
+    get:
+      summary: Get all users
+      description: Retrieve a list of all users
+      operationId: getAllUsers
+      tags:
+        - users
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Create a new user
+      description: Create a new user with the provided details
+      operationId: createUser
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+
+  /api/users/{userId}:
+    get:
+      summary: Get user by ID
+      description: Retrieve a specific user by their ID
+      operationId: getUserById
+      tags:
+        - users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+
+    put:
+      summary: Update user
+      description: Update an existing user
+      operationId: updateUser
+      tags:
+        - users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+
+    delete:
+      summary: Delete user
+      description: Delete a user by ID
+      operationId: deleteUser
+      tags:
+        - users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+
+  /api/users/{userId}/profile:
+    get:
+      summary: Get user profile
+      description: Retrieve detailed profile information for a user
+      operationId: getUserProfile
+      tags:
+        - users
+        - profiles
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: User profile found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '404':
+          description: User or profile not found
+        '500':
+          description: Internal server error
+
+  /api/health:
+    get:
+      summary: Health check
+      description: Check if the API is running
+      operationId: healthCheck
+      tags:
+        - health
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - email
+
+    CreateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+      required:
+        - name
+        - email
+
+    UserProfile:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        bio:
+          type: string
+        location:
+          type: string
+        website:
+          type: string
+      required:
+        - userId

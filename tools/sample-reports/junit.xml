@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="UserServiceTests" tests="5" failures="1" skipped="0" time="2.345">
+        <testcase classname="com.example.UserServiceTests" name="testGetUserByIdSuccess" time="0.123"/>
+        <testcase classname="com.example.UserServiceTests" name="testGetUserByIdNotFound" time="0.045">
+            <failure message="Expected 404 but got 200">
+                AssertionError: Status code mismatch
+                    at UserServiceTests.java:52
+            </failure>
+        </testcase>
+        <testcase classname="com.example.UserServiceTests" name="testCreateUserValidation" time="0.234"/>
+        <testcase classname="com.example.UserServiceTests" name="testUpdateUserSuccess" time="0.567"/>
+        <testcase classname="com.example.UserServiceTests" name="testDeleteUserSuccess" time="0.089"/>
+    </testsuite>
+    <testsuite name="AuthServiceTests" tests="3" failures="0" skipped="1" time="1.023">
+        <testcase classname="com.example.AuthServiceTests" name="testLoginSuccess" time="0.234"/>
+        <testcase classname="com.example.AuthServiceTests" name="testLoginInvalidCredentials" time="0.156"/>
+        <testcase classname="com.example.AuthServiceTests" name="testLogoutSuccess" time="0.089">
+            <skipped message="TODO: Implement logout endpoint">
+                Test skipped pending implementation
+            </skipped>
+        </testcase>
+    </testsuite>
+</testsuites>

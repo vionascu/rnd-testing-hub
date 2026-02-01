@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.rnd.testinghub.JunitIngestionTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-01T16:38:41.857Z" hostname="A-M24RKJLHD7" time="0.124">
+  <properties/>
+  <testcase name="testCalculatedStats()" classname="com.rnd.testinghub.JunitIngestionTest" time="0.074"/>
+  <testcase name="testIngestJunitReport()" classname="com.rnd.testinghub.JunitIngestionTest" time="0.011"/>
+  <testcase name="testTestCasesArePersisted()" classname="com.rnd.testinghub.JunitIngestionTest" time="0.033"/>
+  <system-out><![CDATA[2026-02-01T18:38:41.859+02:00  INFO 68108 --- [rnd-testing-hub] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.rnd.testinghub.JunitIngestionTest]: JunitIngestionTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-01T18:38:41.860+02:00  INFO 68108 --- [rnd-testing-hub] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.rnd.testinghub.RndTestingHubApplication for test class com.rnd.testinghub.JunitIngestionTest
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
