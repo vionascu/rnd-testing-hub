@@ -528,18 +528,20 @@
                 .then(r => r.json())
                 .then(data => {
                     let html = '';
-                    if (data.length === 0) {
+                    const cases = data.cases || data;
+                    if (!cases || cases.length === 0) {
                         html = '<tr><td colspan="5" style="text-align: center;">No test cases found</td></tr>';
                     } else {
-                        data.forEach(test => {
+                        cases.forEach(test => {
                             const statusClass = test.status.toLowerCase();
+                            const testName = test.testName || test.name || 'Unknown';
                             html += `
                                 <tr>
-                                    <td><strong>${test.name}</strong></td>
-                                    <td>${test.classname}</td>
+                                    <td><strong>${testName}</strong></td>
+                                    <td>${testName.split('.')[0]}</td>
                                     <td><span class="status-badge-small ${statusClass}">${test.status}</span></td>
-                                    <td>${test.duration_ms}ms</td>
-                                    <td>${test.error_message || '-'}</td>
+                                    <td>${test.durationMs}ms</td>
+                                    <td>${test.errorMessage || '-'}</td>
                                 </tr>
                             `;
                         });
@@ -558,10 +560,11 @@
                 .then(r => r.json())
                 .then(data => {
                     let html = '';
-                    if (data.length === 0) {
+                    const endpoints = data.endpoints || data;
+                    if (!endpoints || endpoints.length === 0) {
                         html = '<tr><td colspan="3" style="text-align: center;">No API endpoints found</td></tr>';
                     } else {
-                        data.forEach(api => {
+                        endpoints.forEach(api => {
                             const methodClass = api.method.toLowerCase();
                             html += `
                                 <tr>
@@ -586,15 +589,18 @@
                 .then(r => r.json())
                 .then(data => {
                     let html = '';
-                    if (data.length === 0) {
+                    const practices = data.practices || data;
+                    if (!practices || practices.length === 0) {
                         html = '<div class="no-data">No practices found</div>';
                     } else {
-                        data.forEach(practice => {
-                            const tags = (practice.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+                        practices.forEach(practice => {
+                            const tags = (practice.tags || []).split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('');
+                            const title = practice.title || practice.name || 'Untitled';
+                            const content = practice.content || practice.description || 'No description';
                             html += `
                                 <div class="practice-card">
-                                    <h4>${practice.name}</h4>
-                                    <p>${practice.description}</p>
+                                    <h4>${title}</h4>
+                                    <p>${content.substring(0, 200)}...</p>
                                     <div class="tags">${tags}</div>
                                 </div>
                             `;
