@@ -49,8 +49,9 @@ jobs:
 
       - name: Check JAR artifact
         run: |
-          ls -lh backend/build/libs/*.jar
+          ls -lh build/libs/*.jar
           echo "✅ JAR artifact built successfully"
+        working-directory: backend
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v3
