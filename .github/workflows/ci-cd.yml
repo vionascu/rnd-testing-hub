@@ -11,7 +11,7 @@ jobs:
     name: Setup & Validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
@@ -28,7 +28,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
@@ -40,7 +40,7 @@ jobs:
       - name: Check JAR artifact
         run: ls -lh backend/build/libs/*.jar
       - name: Upload JAR artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: rnd-testing-hub-jar
           path: backend/build/libs/rnd-testing-hub-0.1.0.jar
@@ -65,7 +65,7 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
@@ -80,7 +80,7 @@ jobs:
           DATABASE_PASSWORD: postgres
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: backend/build/reports/tests/test/
@@ -94,7 +94,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
@@ -115,9 +115,9 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Download JAR artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: rnd-testing-hub-jar
           path: backend/build/libs/
