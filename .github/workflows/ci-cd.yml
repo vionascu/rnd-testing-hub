@@ -172,7 +172,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Docker image status
-        run: echo "✅ Docker image built (push: ${{ github.event_name == 'push' }})"
+        run: echo "✅ Docker image built successfully"
 
   # Stage 6: Deploy to Render (optional)
   deploy:
